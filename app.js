@@ -4,6 +4,9 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const date = require(__dirname + "/date.js");
+require('dotenv').config();
+
+const secretKey = process.env.SECRET_KEY;
 
 const app = express();
 
@@ -12,10 +15,10 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
-
+console.log(`Secret Key: ${secretKey}`);
 //-----------------mongoose start----------------------
 
-mongoose.connect("mongodb+srv://onojapeter90:ofiegocho@cluster0.k6f3v2f.mongodb.net/todolistDB", {
+mongoose.connect(`mongodb+srv://${secretKey}@cluster0.k6f3v2f.mongodb.net/todolistDB`, {
   useNewUrlParser: true,       
   useUnifiedTopology: true    
 });
